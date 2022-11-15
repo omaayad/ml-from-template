@@ -1,0 +1,5 @@
+sagemaker
+matplotlib==3.6.1
+s3fs==2022.10.0
+awswrangler==2.17.0
+sagemaker-experiments==0.1.35
