@@ -1,0 +1,56 @@
+name: Deploy training pipeline
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: "Python version"
+        type: string
+        required: true
+
+env:
+  PYTHON_PROJECT_VERSION: "${{ inputs.python_version}}"
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: PR checkout
+        uses: actions/checkout@v2
+      - name: Setup Python environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_PROJECT_VERSION }}
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev.txt
+      - name: Nox lint
+        run: nox -s format --forcecolor
+  lint:
+    runs-on: Linux
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_PROJECT_VERSION }}
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev.txt
+      - name: Nox lint
+        run: nox -s format --forcecolor
+  test:
+    runs-on: Linux
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_PROJECT_VERSION }}
+      - name: Install requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r dev.txt
+      - name: Nox test
+        run: nox -s test-${{ env.PYTHON_PROJECT_VERSION }} --forcecolor
