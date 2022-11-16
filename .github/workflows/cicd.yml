@@ -8,30 +8,15 @@ jobs:
     uses: omaayad/ml-from-template/.github/workflows/ci.yml@dev
     with:
       python-version: '3.8'
-    secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      ENV_NAME: ${{ secrets.ENV_NAME }}
   QA:
     needs: CI
     uses: omaayad/ml-from-template/.github/workflows/cd.yml@dev
     with:
       python-version: '3.8'
       environment: QA
-    secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      ENV_NAME: ${{ secrets.ENV_NAME }}
   PROD:
     needs: [CI, QA]
     uses: omaayad/ml-from-template/.github/workflows/cd.yml@dev
     with:
       python-version: '3.8'
       environment: PROD
-    secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
-      ENV_NAME: ${{ secrets.ENV_NAME }}
