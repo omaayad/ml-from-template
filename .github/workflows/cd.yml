@@ -1,4 +1,4 @@
-name: Deploy training pipeline
+name: CD
 on:
   workflow_call:
     inputs:

@@ -1,4 +1,4 @@
-name: Deploy training pipeline
+name: CI
 on:
   workflow_call:
     inputs:
