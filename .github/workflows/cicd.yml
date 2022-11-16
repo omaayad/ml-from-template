@@ -5,7 +5,7 @@ on:
 
 jobs:
   CI:
-    uses: SESA675734/sm-architecture/.github/workflows/ci.yml@dev
+    uses: omaayad/ml-from-template/.github/workflows/ci.yml@dev
     with:
       python-version: '3.8'
     secrets:
@@ -15,7 +15,7 @@ jobs:
       ENV_NAME: ${{ secrets.ENV_NAME }}
   QA:
     needs: CI
-    uses: SESA675734/sm-architecture/.github/workflows/cd.yml@dev
+    uses: omaayad/ml-from-template/.github/workflows/cd.yml@dev
     with:
       python-version: '3.8'
       environment: QA
@@ -26,7 +26,7 @@ jobs:
       ENV_NAME: ${{ secrets.ENV_NAME }}
   PROD:
     needs: [CI, QA]
-    uses: SESA675734/sm-architecture/.github/workflows/cd.yml@dev
+    uses: omaayad/ml-from-template/.github/workflows/cd.yml@dev
     with:
       python-version: '3.8'
       environment: PROD
