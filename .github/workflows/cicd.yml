@@ -1,7 +1,7 @@
 name: Deploy train pipeline
 on:
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   CI:
