@@ -10,15 +10,6 @@ on:
         type: string
         description: environment to deploy to
         required: true
-    secrets:
-      AWS_ACCESS_KEY_ID:
-        required: true
-      AWS_SECRET_ACCESS_KEY:
-        required: true
-      AWS_REGION:
-        required: true
-      ENV_NAME:
-        required: true
 
 env:
   PYTHON_PROJECT_VERSION: "${{ inputs.python_version}}"
