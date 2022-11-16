@@ -55,7 +55,7 @@ def main():
     try:
         xgb_experiment = Experiment.load(f"binary-classification-xgboost-{sm_env}",
                                          sagemaker_boto_client=sm_boto_client)
-    except ValueError:
+    except:
         xgb_experiment = Experiment.create(experiment_name=f"binary-classification-xgboost-{sm_env}",
                                            description="Demo sagemake xgboost ",
                                            sagemaker_boto_client=sm_boto_client)
