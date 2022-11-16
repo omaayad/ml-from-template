@@ -8,7 +8,7 @@ on:
         required: true
 
 env:
-  PYTHON_PROJECT_VERSION: "${{ inputs.python_version }}"
+  PYTHON_PROJECT_VERSION: "${{ inputs.python-version }}"
 
 jobs:
   format:

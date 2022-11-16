@@ -5,18 +5,18 @@ on:
 
 jobs:
   CI:
-    uses: omaayad/ml-from-template/.github/workflows/ci.yml@dev
+    uses: omaayad/ml-from-template/.github/workflows/ci.yml@dev.txt
     with:
       python-version: '3.8'
   QA:
     needs: CI
-    uses: omaayad/ml-from-template/.github/workflows/cd.yml@dev
+    uses: omaayad/ml-from-template/.github/workflows/cd.yml@dev.txt
     with:
       python-version: '3.8'
       environment: QA
   PROD:
     needs: [CI, QA]
-    uses: omaayad/ml-from-template/.github/workflows/cd.yml@dev
+    uses: omaayad/ml-from-template/.github/workflows/cd.yml@dev.txt
     with:
       python-version: '3.8'
       environment: PROD
