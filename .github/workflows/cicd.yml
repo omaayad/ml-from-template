@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 
 jobs:
-  ci:
+  CI:
     use: sm-architecture/.github/workflows/ci@main
     with:
       python-version: '3.8'
@@ -12,3 +12,26 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ secrets.AWS_REGION }}
+      ENV_NAME: ${{ secrets.ENV_NAME }}
+  QA:
+    needs: CI
+    use: sm-architecture/.github/workflows/cd@main
+    environment: QA
+    with:
+      python-version: '3.8'
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      ENV_NAME: ${{ secrets.ENV_NAME }}
+  PROD:
+    needs: [CI, QA]
+    use: sm-architecture/.github/workflows/cd@main
+    environment: PROD
+    with:
+      python-version: '3.8'
+    secrets:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      ENV_NAME: ${{ secrets.ENV_NAME }}
