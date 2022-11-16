@@ -5,7 +5,7 @@ on:
 
 jobs:
   CI:
-    use: SESA675734/sm-architecture/.github/workflows/ci
+    uses: SESA675734/sm-architecture/.github/workflows/ci@dev
     with:
       python-version: '3.8'
     secrets:
@@ -15,10 +15,10 @@ jobs:
       ENV_NAME: ${{ secrets.ENV_NAME }}
   QA:
     needs: CI
-    use: SESA675734/sm-architecture/.github/workflows/cd
-    environment: QA
+    uses: SESA675734/sm-architecture/.github/workflows/cd@dev
     with:
       python-version: '3.8'
+      environment: QA
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -26,10 +26,10 @@ jobs:
       ENV_NAME: ${{ secrets.ENV_NAME }}
   PROD:
     needs: [CI, QA]
-    use: SESA675734/sm-architecture/.github/workflows/cd
-    environment: PROD
+    uses: SESA675734/sm-architecture/.github/workflows/cd@dev
     with:
       python-version: '3.8'
+      environment: PROD
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
