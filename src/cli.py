@@ -33,7 +33,7 @@ hyperparams = {"max_depth": 5,
 
 
 def main():
-    sm_env = os.getenv("ENV", "DEV")
+    sm_env = os.getenv("ENV_NAME", "DEV")
     aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
     aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
     boto_session = boto3.Session(aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key,
@@ -55,7 +55,7 @@ def main():
     try:
         xgb_experiment = Experiment.load(f"binary-classification-xgboost-{sm_env}",
                                          sagemaker_boto_client=sm_boto_client)
-    except ValueError:
+    except:
         xgb_experiment = Experiment.create(experiment_name=f"binary-classification-xgboost-{sm_env}",
                                            description="Demo sagemake xgboost ",
                                            sagemaker_boto_client=sm_boto_client)
